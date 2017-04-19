@@ -1,0 +1,454 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/kraigm/homebridge-nest#readme">homebridge-nest (v1.1.2)</a>
+</h1>
+<h4>Nest plugin for homebridge</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.homebridge-nest">module homebridge-nest</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.homebridge-nest.homebridge-nest">
+            function <span class="apidocSignatureSpan"></span>homebridge-nest
+            <span class="apidocSignatureSpan">(homebridge)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.homebridge-nest.nest_connection">
+            function <span class="apidocSignatureSpan">homebridge-nest.</span>nest_connection
+            <span class="apidocSignatureSpan">(token, log)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">homebridge-nest.</span>nest_connection.prototype</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.homebridge-nest.nest_connection">module homebridge-nest.nest_connection</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.homebridge-nest.nest_connection.nest_connection">
+            function <span class="apidocSignatureSpan">homebridge-nest.</span>nest_connection
+            <span class="apidocSignatureSpan">(token, log)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.homebridge-nest.nest_connection.prototype">module homebridge-nest.nest_connection.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.homebridge-nest.nest_connection.prototype.auth">
+            function <span class="apidocSignatureSpan">homebridge-nest.nest_connection.prototype.</span>auth
+            <span class="apidocSignatureSpan">(clientId, clientSecret, code)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.homebridge-nest.nest_connection.prototype.isOpen">
+            function <span class="apidocSignatureSpan">homebridge-nest.nest_connection.prototype.</span>isOpen
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.homebridge-nest.nest_connection.prototype.open">
+            function <span class="apidocSignatureSpan">homebridge-nest.nest_connection.prototype.</span>open
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.homebridge-nest.nest_connection.prototype.subscribe">
+            function <span class="apidocSignatureSpan">homebridge-nest.nest_connection.prototype.</span>subscribe
+            <span class="apidocSignatureSpan">(handler)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.homebridge-nest.nest_connection.prototype.update">
+            function <span class="apidocSignatureSpan">homebridge-nest.nest_connection.prototype.</span>update
+            <span class="apidocSignatureSpan">(path, data)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.homebridge-nest" id="apidoc.module.homebridge-nest">module homebridge-nest</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.homebridge-nest.homebridge-nest" id="apidoc.element.homebridge-nest.homebridge-nest">
+        function <span class="apidocSignatureSpan"></span>homebridge-nest
+        <span class="apidocSignatureSpan">(homebridge)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">homebridge-nest = function (homebridge) {
+	Service = homebridge.hap.Service;
+	Characteristic = homebridge.hap.Characteristic;
+	Accessory = homebridge.hap.Accessory;
+	uuid = homebridge.hap.uuid;
+
+	<span class="apidocCodeCommentSpan">/**
+	 * Characteristic "Away"
+	 */
+</span>	Away = function () {
+		Characteristic.call(this, 'Away', 'D6D47D29-4639-4F44-B53C-D84015DAEBDB');
+		this.setProps({
+			format: Characteristic.Formats.BOOL,
+			perms: [Characteristic.Perms.READ, Characteristic.Perms.WRITE, Characteristic.Perms.NOTIFY]
+		});
+		this.value = this.getDefaultValue();
+	};
+	inherits(Away, Characteristic);
+	Away.HOME = 0;
+	Away.AWAY = 1;
+
+	var exportedTypes = {
+		Accessory: Accessory,
+		Service: Service,
+		Characteristic: Characteristic,
+		uuid: uuid,
+		Away: Away
+	};
+
+	DeviceAccessory = require('./lib/nest-device-accessory.js')(exportedTypes);
+	ThermostatAccessory = require('./lib/nest-thermostat-accessory.js')(exportedTypes);
+	ProtectAccessory = require('./lib/nest-protect-accessory.js')(exportedTypes);
+	CamAccessory = require('./lib/nest-cam-accessory.js')(exportedTypes);
+
+	var acc = NestThermostatAccessory.prototype;
+	inherits(NestThermostatAccessory, Accessory);
+	NestThermostatAccessory.prototype.parent = Accessory.prototype;
+	for (var mn in acc) {
+		NestThermostatAccessory.prototype[mn] = acc[mn];
+	}
+
+	homebridge.registerPlatform("homebridge-nest", "Nest", NestPlatform);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.homebridge-nest.nest_connection" id="apidoc.element.homebridge-nest.nest_connection">
+        function <span class="apidocSignatureSpan">homebridge-nest.</span>nest_connection
+        <span class="apidocSignatureSpan">(token, log)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Connection(token, log) {
+	this.token = token;
+	this.log = function(info) {
+		log(logPrefix + info);
+	};
+	this.debug = function(info) {
+		log.debug(logPrefix + info);
+	};
+	this.error = function(info) {
+		log.error(logPrefix + info);
+	};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.homebridge-nest.nest_connection" id="apidoc.module.homebridge-nest.nest_connection">module homebridge-nest.nest_connection</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.homebridge-nest.nest_connection.nest_connection" id="apidoc.element.homebridge-nest.nest_connection.nest_connection">
+        function <span class="apidocSignatureSpan">homebridge-nest.</span>nest_connection
+        <span class="apidocSignatureSpan">(token, log)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Connection(token, log) {
+	this.token = token;
+	this.log = function(info) {
+		log(logPrefix + info);
+	};
+	this.debug = function(info) {
+		log.debug(logPrefix + info);
+	};
+	this.error = function(info) {
+		log.error(logPrefix + info);
+	};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.homebridge-nest.nest_connection.prototype" id="apidoc.module.homebridge-nest.nest_connection.prototype">module homebridge-nest.nest_connection.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.homebridge-nest.nest_connection.prototype.auth" id="apidoc.element.homebridge-nest.nest_connection.prototype.auth">
+        function <span class="apidocSignatureSpan">homebridge-nest.nest_connection.prototype.</span>auth
+        <span class="apidocSignatureSpan">(clientId, clientSecret, code)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">auth = function (clientId, clientSecret, code) {
+	return rp({
+		method: 'POST',
+		uri: 'https://api.home.nest.com/oauth2/access_token',
+		form: {
+			client_id: clientId,
+			client_secret: clientSecret,
+			code: code,
+			grant_type: "authorization_code"
+		}
+	})
+	.then(function (parsedBody) {
+		var body = JSON.parse(parsedBody);
+		this.token = body.access_token;
+		return this.token;
+	}.bind(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+			return;
+		}
+
+		var conn = new NestConnection(token, log);
+		if (token) {
+			resolve(conn)
+		} else {
+			conn.<span class="apidocCodeKeywordSpan">auth</span>(clientId, clientSecret, code)
+				.then(function(token) {
+					if (log) log.warn("CODE IS ONLY VALID ONCE! Update config to use {'token':'" + token + "'
+;} instead.");
+					resolve(conn);
+				})
+				.catch(function(err){
+					reject(err);
+					if (log) log.warn("Auth failed which likely means the code is no longer valid. Should be able to generate a new one at
+ " + authURL);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.homebridge-nest.nest_connection.prototype.isOpen" id="apidoc.element.homebridge-nest.nest_connection.prototype.isOpen">
+        function <span class="apidocSignatureSpan">homebridge-nest.nest_connection.prototype.</span>isOpen
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">isOpen = function () {
+	return this.conn ? true : false;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.homebridge-nest.nest_connection.prototype.open" id="apidoc.element.homebridge-nest.nest_connection.prototype.open">
+        function <span class="apidocSignatureSpan">homebridge-nest.nest_connection.prototype.</span>open
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">open = function () {
+	if (!this.token) {
+		return Promise.reject(new Error("You must provide a token or auth before you can open a connection."));
+	}
+
+	this.conn = new Firebase('wss://developer-api.nest.com', new Firebase.Context());
+	return authAsync.call(this)
+		.then(function() {
+			// Register the callback to be fired every time auth state changes
+			this.conn.onAuth(authDataCallback.bind(this));
+			return this;
+		}.bind(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+		var handleUpdates = function(data){
+			updateAccessories(data, that.accessoryLookup);
+		};
+		setupConnection(this.config, this.log)
+			.then(function(conn){
+				that.conn = conn;
+				return that.conn.<span class="apidocCodeKeywordSpan">open</span>();
+			})
+			.then(function(){
+				return that.conn.subscribe(handleUpdates);
+			})
+			.then(function(data) {
+				that.accessoryLookup = generateAccessories(data);
+				if (callback) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.homebridge-nest.nest_connection.prototype.subscribe" id="apidoc.element.homebridge-nest.nest_connection.prototype.subscribe">
+        function <span class="apidocSignatureSpan">homebridge-nest.nest_connection.prototype.</span>subscribe
+        <span class="apidocSignatureSpan">(handler)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">subscribe = function (handler) {
+	var self = this;
+	return new Promise(function (resolve, reject) {
+		if (!handler){
+			reject(new Error("You must specify a handler"))
+		} else {
+			var notify = resolve || handler;
+			this.conn.on('value', function (snapshot) {
+				var data = snapshot.val();
+				if (data) {
+					notify(data);
+					notify = handler;
+				} else {
+					self.log("Disconnect Detected");
+				}
+			});
+		}
+	}.bind(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		};
+		setupConnection(this.config, this.log)
+			.then(function(conn){
+				that.conn = conn;
+				return that.conn.open();
+			})
+			.then(function(){
+				return that.conn.<span class="apidocCodeKeywordSpan">subscribe</span>(handleUpdates);
+			})
+			.then(function(data) {
+				that.accessoryLookup = generateAccessories(data);
+				if (callback) {
+					var copy = that.accessoryLookup.map(function (a) { return a; });
+					callback(copy);
+				}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.homebridge-nest.nest_connection.prototype.update" id="apidoc.element.homebridge-nest.nest_connection.prototype.update">
+        function <span class="apidocSignatureSpan">homebridge-nest.nest_connection.prototype.</span>update
+        <span class="apidocSignatureSpan">(path, data)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">update = function (path, data) {
+	var child = this.conn.child(path);
+	return Promise.fromCallback(child.set.bind(child, data));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    return 'devices/' + this.deviceGroup + '/' + this.deviceId + '/' + property;
+};
+
+NestDeviceAccessory.prototype.updateDevicePropertyAsync = function(property, value, propertyDescription, valueDescription) {
+    propertyDescription = propertyDescription || property;
+    valueDescription = valueDescription || value;
+    this.log("Setting " + propertyDescription + " for " + this.name + " to: " + valueDescription);
+    return this.conn.<span class="apidocCodeKeywordSpan">update</span>(this.getDevicePropertyPath(property), value)
+        .return(value);
+};
+
+NestDeviceAccessory.prototype.getStructurePropertyPath = function(property) {
+    return 'structures/' + this.structureId + '/' + property;
+};
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
